@@ -1,0 +1,307 @@
+   1                             		.file	"crc.c"
+   2                             		.section P,"ax"
+   3                             	.Ltext0:
+   4                             		.section	.text.crc_reset,"ax",@progbits
+   5                             		.global	_crc_reset
+   7                             	_crc_reset:
+   8                             	.LVL0:
+   9                             	.LFB0:
+  10                             		.file 1 "../src/module/crc.c"
+   1:../src/module/crc.c **** /*
+   2:../src/module/crc.c ****  * crc.c
+   3:../src/module/crc.c ****  *
+   4:../src/module/crc.c ****  *  Created on: 2024/06/01
+   5:../src/module/crc.c ****  *      Author: aquryle
+   6:../src/module/crc.c ****  */
+   7:../src/module/crc.c **** 
+   8:../src/module/crc.c **** #include "crc.h"
+   9:../src/module/crc.c **** 
+  10:../src/module/crc.c **** static CRC_Algorithm selected_argorithm;
+  11:../src/module/crc.c **** 
+  12:../src/module/crc.c **** void crc_reset(CRC_Algorithm argo, uint16_t init)
+  13:../src/module/crc.c **** {
+  11                             		.loc 1 13 1 view -0
+  14:../src/module/crc.c **** 	uint8_t tmp = 0;
+  12                             		.loc 1 14 2 view .LVU1
+  15:../src/module/crc.c **** 
+  16:../src/module/crc.c **** 	// 計算方法指定
+  17:../src/module/crc.c **** 	tmp = 0x84;		// CRCDORクリア、MSB用
+  13                             		.loc 1 17 2 view .LVU2
+  18:../src/module/crc.c **** 	tmp &= argo;	// アルゴリズム指定
+  14                             		.loc 1 18 2 view .LVU3
+  15                             		.loc 1 18 6 is_stmt 0 view .LVU4
+  16 0000 FB 46 84                		mov.L	#-124, r4
+  17 0003 53 14                   		and	r1, r4
+  18                             	.LVL1:
+  19:../src/module/crc.c **** 	CRC.CRCCR.BYTE = tmp;
+  19                             		.loc 1 19 2 is_stmt 1 view .LVU5
+  20                             		.loc 1 19 17 is_stmt 0 view .LVU6
+  21 0005 FB 5E 80 82 08          		mov.L	#0x88280, r5
+  22 000a C3 54                   		mov.B	r4, [r5]
+  20:../src/module/crc.c **** 
+  21:../src/module/crc.c **** 	// 初期値設定
+  22:../src/module/crc.c **** 	if (crc8_atm == init)	CRC.CRCDOR = (uint8_t)init;
+  23                             		.loc 1 22 2 is_stmt 1 view .LVU7
+  24                             		.loc 1 22 5 is_stmt 0 view .LVU8
+  25 000c 5F 25                   		movu.W	r2, r5
+  26 000e 61 15                   		cmp	#1, r5
+  27 0010 20 12                   		beq	.L4
+  23:../src/module/crc.c **** 	else					CRC.CRCDOR = init;
+  28                             		.loc 1 23 11 is_stmt 1 view .LVU9
+  29                             		.loc 1 23 22 is_stmt 0 view .LVU10
+  30 0012 FB 5E 80 82 08          		mov.L	#0x88280, r5
+  31 0017 90 5A                   		mov.W	r2, 2[r5]
+  32                             	.LVL2:
+  33                             	.L3:
+  24:../src/module/crc.c **** 
+  25:../src/module/crc.c **** 	// 計算中のアルゴリズムを保存
+  26:../src/module/crc.c **** 	selected_argorithm = argo;
+  34                             		.loc 1 26 2 is_stmt 1 view .LVU11
+  35                             		.loc 1 26 21 is_stmt 0 view .LVU12
+  36 0019 FB 52 00 00 00 00       		mov.L	#_selected_argorithm, r5
+  37 001f E3 51                   		mov.L	r1, [r5]
+  27:../src/module/crc.c **** }
+  38                             		.loc 1 27 1 view .LVU13
+  39 0021 02                      		rts
+  40                             	.LVL3:
+  41                             	.L4:
+  22:../src/module/crc.c **** 	else					CRC.CRCDOR = init;
+  42                             		.loc 1 22 24 is_stmt 1 discriminator 1 view .LVU14
+  43 0022 76 22 FF 00             		and #0xff, r2
+  44                             	.LVL4:
+  22:../src/module/crc.c **** 	else					CRC.CRCDOR = init;
+  45                             		.loc 1 22 35 is_stmt 0 discriminator 1 view .LVU15
+  46 0026 FB 5E 80 82 08          		mov.L	#0x88280, r5
+  47                             	.LVL5:
+  22:../src/module/crc.c **** 	else					CRC.CRCDOR = init;
+  48                             		.loc 1 22 35 discriminator 1 view .LVU16
+  49 002b 90 5A                   		mov.W	r2, 2[r5]
+  50 002d 2E EC                   		bra	.L3
+  51                             	.LFE0:
+  53                             		.section	.text.crc_input,"ax",@progbits
+  54                             		.global	_crc_input
+  56                             	_crc_input:
+  57                             	.LVL6:
+  58                             	.LFB1:
+  28:../src/module/crc.c **** 
+  29:../src/module/crc.c **** 
+  30:../src/module/crc.c **** void crc_input(uint8_t data)
+  31:../src/module/crc.c **** {
+  59                             		.loc 1 31 1 is_stmt 1 view -0
+  32:../src/module/crc.c **** 	CRC.CRCDIR = data;
+  60                             		.loc 1 32 2 view .LVU18
+  61                             		.loc 1 32 13 is_stmt 0 view .LVU19
+  62 0000 FB 5E 80 82 08          		mov.L	#0x88280, r5
+  63 0005 80 59                   		mov.B	r1, 1[r5]
+  33:../src/module/crc.c **** }
+  64                             		.loc 1 33 1 view .LVU20
+  65 0007 02                      		rts
+  66                             	.LFE1:
+  68                             		.section	.text.crc_output,"ax",@progbits
+  69                             		.global	_crc_output
+  71                             	_crc_output:
+  72                             	.LFB2:
+  34:../src/module/crc.c **** 
+  35:../src/module/crc.c **** 
+  36:../src/module/crc.c **** uint16_t crc_output(void)
+  37:../src/module/crc.c **** {
+  73                             		.loc 1 37 1 is_stmt 1 view -0
+  38:../src/module/crc.c **** 	uint16_t crc = CRC.CRCDOR;
+  74                             		.loc 1 38 2 view .LVU22
+  75                             		.loc 1 38 11 is_stmt 0 view .LVU23
+  76 0000 FB 5E 80 82 08          		mov.L	#0x88280, r5
+  77 0005 98 59                   		mov.W	2[r5], r1
+  78                             	.LVL7:
+  39:../src/module/crc.c **** 
+  40:../src/module/crc.c **** 	// 8ビットで計算中のときは、上位ビットをクリアする
+  41:../src/module/crc.c **** 	if (crc8_atm == selected_argorithm) crc &= 0x00FF;
+  79                             		.loc 1 41 2 is_stmt 1 view .LVU24
+  80                             		.loc 1 41 15 is_stmt 0 view .LVU25
+  81 0007 FB 52 00 00 00 00       		mov.L	#_selected_argorithm, r5
+  82 000d EC 55                   		mov.L	[r5], r5
+  83                             		.loc 1 41 5 view .LVU26
+  84 000f 61 15                   		cmp	#1, r5
+  85 0011 14                      		beq	.L8
+  86                             	.LVL8:
+  87                             	.L7:
+  42:../src/module/crc.c **** 
+  43:../src/module/crc.c **** 	return crc;
+  88                             		.loc 1 43 2 is_stmt 1 view .LVU27
+  44:../src/module/crc.c **** }
+  89                             		.loc 1 44 1 is_stmt 0 view .LVU28
+  90 0012 5F 11                   		movu.W	r1, r1
+  91                             		.loc 1 44 1 view .LVU29
+  92 0014 02                      		rts
+  93                             	.L8:
+  41:../src/module/crc.c **** 
+  94                             		.loc 1 41 38 is_stmt 1 discriminator 1 view .LVU30
+  41:../src/module/crc.c **** 
+  95                             		.loc 1 41 42 is_stmt 0 discriminator 1 view .LVU31
+  96 0015 76 21 FF 00             		and #0xff, r1
+  97                             	.LVL9:
+  41:../src/module/crc.c **** 
+  98                             		.loc 1 41 42 discriminator 1 view .LVU32
+  99 0019 2E F9                   		bra	.L7
+ 100                             	.LFE2:
+ 102                             		.section	.text.crc_test,"ax",@progbits
+ 103                             		.global	_crc_test
+ 105                             	_crc_test:
+ 106                             	.LFB3:
+  45:../src/module/crc.c **** 
+  46:../src/module/crc.c **** 
+  47:../src/module/crc.c **** 
+  48:../src/module/crc.c **** #ifdef DEBUGGING
+  49:../src/module/crc.c **** volatile uint16_t result_crc8;
+  50:../src/module/crc.c **** volatile uint16_t result_crc16u;
+  51:../src/module/crc.c **** volatile uint16_t result_crc16c;
+  52:../src/module/crc.c **** 
+  53:../src/module/crc.c **** void crc_test(void)
+  54:../src/module/crc.c **** {
+ 107                             		.loc 1 54 1 is_stmt 1 view -0
+ 108 0000 7E A7                   		push.l	r7
+ 109                             	.LCFI0:
+  55:../src/module/crc.c **** 	uint8_t i;
+ 110                             		.loc 1 55 2 view .LVU34
+  56:../src/module/crc.c **** 
+  57:../src/module/crc.c **** 	crc_reset(crc8_atm, CRC8_ATM_INITIAL);
+ 111                             		.loc 1 57 2 view .LVU35
+ 112 0002 66 02                   		mov	#0, r2
+ 113 0004 66 11                   		mov.L	#1, r1
+ 114 0006 05 00 00 00             		bsr	_crc_reset
+ 115                             	.LVL10:
+  58:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 116                             		.loc 1 58 2 view .LVU36
+ 117                             		.loc 1 58 9 is_stmt 0 view .LVU37
+ 118 000a 66 07                   		mov	#0, r7
+ 119                             	.LVL11:
+ 120                             	.L10:
+ 121                             		.loc 1 58 2 discriminator 1 view .LVU38
+ 122 000c 5B 75                   		movu.B	r7, r5
+ 123 000e 61 95                   		cmp	#9, r5
+ 124 0010 24 0C                   		bgtu	.L17
+  59:../src/module/crc.c **** 		crc_input(i);
+ 125                             		.loc 1 59 3 is_stmt 1 discriminator 3 view .LVU39
+ 126 0012 CF 71                   		mov.B	r7, r1
+ 127 0014 05 00 00 00             		bsr	_crc_input
+ 128                             	.LVL12:
+  58:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 129                             		.loc 1 58 22 is_stmt 0 discriminator 3 view .LVU40
+ 130 0018 62 17                   		add	#1, r7
+ 131                             	.LVL13:
+  58:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 132                             		.loc 1 58 22 discriminator 3 view .LVU41
+ 133 001a 2E F2                   		bra	.L10
+ 134                             	.LVL14:
+ 135                             	.L17:
+  60:../src/module/crc.c **** 	}
+  61:../src/module/crc.c **** 	result_crc8 = (uint8_t)crc_output();
+ 136                             		.loc 1 61 2 is_stmt 1 view .LVU42
+ 137                             		.loc 1 61 25 is_stmt 0 view .LVU43
+ 138 001c 05 00 00 00             		bsr	_crc_output
+ 139                             	.LVL15:
+ 140 0020 5B 11                   		movu.B	r1, r1
+ 141                             		.loc 1 61 14 view .LVU44
+ 142 0022 FB 72 00 00 00 00       		mov.L	#_result_crc8, r7
+ 143                             	.LVL16:
+ 144                             		.loc 1 61 14 view .LVU45
+ 145 0028 D3 71                   		mov.W	r1, [r7]
+  62:../src/module/crc.c **** 
+  63:../src/module/crc.c **** 	crc_reset(crc16_usb, CRC16_USB_INITIAL);
+ 146                             		.loc 1 63 2 is_stmt 1 view .LVU46
+ 147 002a FB 26 FF                		mov	#-1, r2
+ 148 002d 66 21                   		mov.L	#2, r1
+ 149 002f 05 00 00 00             		bsr	_crc_reset
+ 150                             	.LVL17:
+  64:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 151                             		.loc 1 64 2 view .LVU47
+ 152                             		.loc 1 64 9 is_stmt 0 view .LVU48
+ 153 0033 66 07                   		mov	#0, r7
+ 154                             	.LVL18:
+ 155                             	.L12:
+ 156                             		.loc 1 64 2 discriminator 1 view .LVU49
+ 157 0035 5B 75                   		movu.B	r7, r5
+ 158 0037 61 95                   		cmp	#9, r5
+ 159 0039 24 0C                   		bgtu	.L18
+  65:../src/module/crc.c **** 		crc_input(i);
+ 160                             		.loc 1 65 3 is_stmt 1 discriminator 3 view .LVU50
+ 161 003b CF 71                   		mov.B	r7, r1
+ 162 003d 05 00 00 00             		bsr	_crc_input
+ 163                             	.LVL19:
+  64:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 164                             		.loc 1 64 22 is_stmt 0 discriminator 3 view .LVU51
+ 165 0041 62 17                   		add	#1, r7
+ 166                             	.LVL20:
+  64:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 167                             		.loc 1 64 22 discriminator 3 view .LVU52
+ 168 0043 2E F2                   		bra	.L12
+ 169                             	.LVL21:
+ 170                             	.L18:
+  66:../src/module/crc.c **** 	}
+  67:../src/module/crc.c **** 	result_crc16u = crc_output();
+ 171                             		.loc 1 67 2 is_stmt 1 view .LVU53
+ 172                             		.loc 1 67 18 is_stmt 0 view .LVU54
+ 173 0045 05 00 00 00             		bsr	_crc_output
+ 174                             	.LVL22:
+ 175                             		.loc 1 67 16 view .LVU55
+ 176 0049 FB 72 00 00 00 00       		mov.L	#_result_crc16u, r7
+ 177                             	.LVL23:
+ 178                             		.loc 1 67 16 view .LVU56
+ 179 004f D3 71                   		mov.W	r1, [r7]
+  68:../src/module/crc.c **** 
+  69:../src/module/crc.c **** 	crc_reset(crc16_ccitt, CRC16_CCITT_INITIAL);
+ 180                             		.loc 1 69 2 is_stmt 1 view .LVU57
+ 181 0051 FB 2A 0F 1D             		mov	#0x1d0f, r2
+ 182 0055 66 31                   		mov.L	#3, r1
+ 183 0057 05 00 00 00             		bsr	_crc_reset
+ 184                             	.LVL24:
+  70:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 185                             		.loc 1 70 2 view .LVU58
+ 186                             		.loc 1 70 9 is_stmt 0 view .LVU59
+ 187 005b 66 07                   		mov	#0, r7
+ 188                             	.LVL25:
+ 189                             	.L14:
+ 190                             		.loc 1 70 2 discriminator 1 view .LVU60
+ 191 005d 5B 75                   		movu.B	r7, r5
+ 192 005f 61 95                   		cmp	#9, r5
+ 193 0061 24 0C                   		bgtu	.L19
+  71:../src/module/crc.c **** 		crc_input(i);
+ 194                             		.loc 1 71 3 is_stmt 1 discriminator 3 view .LVU61
+ 195 0063 CF 71                   		mov.B	r7, r1
+ 196 0065 05 00 00 00             		bsr	_crc_input
+ 197                             	.LVL26:
+  70:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 198                             		.loc 1 70 22 is_stmt 0 discriminator 3 view .LVU62
+ 199 0069 62 17                   		add	#1, r7
+ 200                             	.LVL27:
+  70:../src/module/crc.c **** 	for (i = 0; i <10; i++) {
+ 201                             		.loc 1 70 22 discriminator 3 view .LVU63
+ 202 006b 2E F2                   		bra	.L14
+ 203                             	.LVL28:
+ 204                             	.L19:
+  72:../src/module/crc.c **** 	}
+  73:../src/module/crc.c **** 	result_crc16c = crc_output();
+ 205                             		.loc 1 73 2 is_stmt 1 view .LVU64
+ 206                             		.loc 1 73 18 is_stmt 0 view .LVU65
+ 207 006d 05 00 00 00             		bsr	_crc_output
+ 208                             	.LVL29:
+ 209                             		.loc 1 73 16 view .LVU66
+ 210 0071 FB 72 00 00 00 00       		mov.L	#_result_crc16c, r7
+ 211                             	.LVL30:
+ 212                             		.loc 1 73 16 view .LVU67
+ 213 0077 D3 71                   		mov.W	r1, [r7]
+  74:../src/module/crc.c **** }
+ 214                             		.loc 1 74 1 view .LVU68
+ 215 0079 3F 77 01                		rtsd	#4, r7-r7
+ 216                             	.LFE3:
+ 218                             		.comm	_result_crc16c,2,2
+ 219                             		.comm	_result_crc16u,2,2
+ 220                             		.comm	_result_crc8,2,2
+ 221                             		.section	.bss.selected_argorithm,"aw",@nobits
+ 222                             		.balign 4
+ 225                             	_selected_argorithm:
+ 226 0000 00 00 00 00             		.zero	4
+ 283                             	.Letext0:
+ 284                             		.file 2 "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/iodefine.h"
+ 285                             		.file 3 "c:\\programdata\\gcc for renesas rx 8.3.0.202311-gnurx-elf\\rx-elf\\rx-elf\\rx-elf\\inclu
+ 286                             		.file 4 "c:\\programdata\\gcc for renesas rx 8.3.0.202311-gnurx-elf\\rx-elf\\rx-elf\\rx-elf\\inclu
+ 287                             		.file 5 "../src/module/crc.h"

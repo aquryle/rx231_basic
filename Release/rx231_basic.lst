@@ -19,28 +19,26 @@
   11:../src/rx231_basic.c **** #include "iodefine.h"
   12:../src/rx231_basic.c **** #include <stdint.h>
   13:../src/rx231_basic.c **** 
-  14:../src/rx231_basic.c **** 
+  14:../src/rx231_basic.c **** #include "crc.h"
   15:../src/rx231_basic.c **** 
-  16:../src/rx231_basic.c **** 
-  17:../src/rx231_basic.c **** 
-  18:../src/rx231_basic.c **** int main(void) {
-  10                             		.loc 1 18 16 view -0
-  11 0000 60 40                   		sub	#4, r0
-  12                             	.LCFI0:
+  16:../src/rx231_basic.c **** //! UART通信時のコマンド受付用バッファ
+  17:../src/rx231_basic.c **** static cmd_buf[0x100];
+  18:../src/rx231_basic.c **** 
   19:../src/rx231_basic.c **** 
-  20:../src/rx231_basic.c **** 	volatile int a = 0;
-  13                             		.loc 1 20 2 view .LVU1
-  14                             		.loc 1 20 15 is_stmt 0 view .LVU2
-  15 0002 F8 06 00                		mov.L	#0, [r0]
-  16                             	.L2:
-  21:../src/rx231_basic.c **** 
+  20:../src/rx231_basic.c **** 
+  21:../src/rx231_basic.c **** int main(void) {
+  10                             		.loc 1 21 16 view -0
+  11                             	.L2:
   22:../src/rx231_basic.c **** 
-  23:../src/rx231_basic.c **** 	while (1) {
-  17                             		.loc 1 23 2 is_stmt 1 discriminator 1 view .LVU3
-  24:../src/rx231_basic.c **** 
-  25:../src/rx231_basic.c **** 
-  26:../src/rx231_basic.c ****     }
-  18                             		.loc 1 26 5 discriminator 1 view .LVU4
-  19 0005 2E 00                   		bra	.L2
-  20                             	.LFE0:
-  52                             	.Letext0:
+  23:../src/rx231_basic.c **** 
+  24:../src/rx231_basic.c **** 	// メインループ
+  25:../src/rx231_basic.c **** 	while (1) {
+  12                             		.loc 1 25 2 discriminator 1 view .LVU1
+  26:../src/rx231_basic.c **** 
+  27:../src/rx231_basic.c **** 
+  28:../src/rx231_basic.c **** 
+  29:../src/rx231_basic.c **** 	}
+  13                             		.loc 1 29 2 discriminator 1 view .LVU2
+  14 0000 2E 00                   		bra	.L2
+  15                             	.LFE0:
+  43                             	.Letext0:

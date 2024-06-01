@@ -8,21 +8,26 @@
 /*                                                             */
 /***************************************************************/
 
-#include "iodefine.h"
-#include <stdint.h>
+
+#include "common.h"
+#include "crc.h"
 
 
+
+
+//! UART通信時のコマンド受付用バッファ
+volatile uint8_t cmd_buf[0x100];
 
 
 
 int main(void) {
 
-	volatile int a = 0;
 
-
+	// メインループ
 	while (1) {
 
 
-    }
-return a;
+
+	}
+return 0;
 }

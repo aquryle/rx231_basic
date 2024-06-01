@@ -1,12 +1,12 @@
 [
   {
     "directory": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic",
-    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/hwinit.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/generate/hwinit.o\"",
+    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/hwinit.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/generate/hwinit.o\"",
     "file": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/hwinit.c"
   },
   {
     "directory": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic",
-    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/inthandler.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/generate/inthandler.o\"",
+    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/inthandler.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/generate/inthandler.o\"",
     "file": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/inthandler.c"
   },
   {
@@ -16,13 +16,23 @@
   },
   {
     "directory": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic",
-    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/vects.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/generate/vects.o\"",
+    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/vects.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/generate/vects.o\"",
     "file": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate/vects.c"
   },
   {
     "directory": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic",
-    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/rx231_basic.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/src/rx231_basic.o\"",
-    "file": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/rx231_basic.c"
+    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/main.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/src/main.o\"",
+    "file": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/main.c"
+  },
+  {
+    "directory": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic",
+    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module/crc.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/src/module/crc.o\"",
+    "file": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module/crc.c"
+  },
+  {
+    "directory": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic",
+    "command": "rx-elf-gcc -Og -ffunction-sections -fdata-sections -fno-strict-aliasing -fdiagnostics-parseable-fixits -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wstack-usage\u003d100 -g2 -misa\u003dv2 -mlittle-endian-data -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/generate\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src\" -I\"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/module\" -Wa,-adlnh\u003d\"$(basename $(notdir $\u003c)).lst\" \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/utility.c\" -c -o \"C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/Release/src/utility.o\"",
+    "file": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic/src/utility.c"
   },
   {
     "directory": "C:/Users/sata/develop/e2studio_2024_01/RX231/rx231_basic",
